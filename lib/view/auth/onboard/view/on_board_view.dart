@@ -1,10 +1,8 @@
-import 'package:core_flutter_app/core/extension/context_extension.dart';
 import 'package:core_flutter_app/view/_product/widget/text/local_custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/base/view/base_widget.dart';
-import '../../../_product/_constants/image_path_svg.dart';
+import '../../../../core/extension/context_extension.dart';
 import '../../../_product/widget/avatar/on_board_circle.dart';
 import '../model/on_board_model.dart';
 import '../viewModel/on_board_view_model.dart';
@@ -95,9 +93,15 @@ class OnBoardView extends StatelessWidget {
   Column buildColumnBody(BuildContext context, OnBoardModel model) {
     return Column(
       children: [
-        Expanded(flex: 5, child: buildSvgPicture(model.imagePath)),
+        Expanded(flex: 5, child: buildImageWidget(model.imagePath)),
         buildColumnDescription(context, model),
       ],
+    );
+  }
+
+  Widget buildImageWidget(String imagePath) {
+    return Container(
+      child: Icon(Icons.image, size: 200), // Temporary placeholder
     );
   }
 
@@ -119,7 +123,7 @@ class OnBoardView extends StatelessWidget {
   ) {
     return LocaleText(
       value: model.title,
-
+      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
     );
   }
 
@@ -130,7 +134,7 @@ class OnBoardView extends StatelessWidget {
     return LocaleText(
       value: model.description,
       textAlign: TextAlign.center,
-
+      style: TextStyle(fontSize: 16),
     );
   }
 }

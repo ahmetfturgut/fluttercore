@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:kartal/kartal.dart';
 
 import '../../../../core/base/view/base_widget.dart';
-import '../../../_product/_constants/image_path_svg.dart';
+import '../../../../core/extension/context_extension.dart';
 import '../../../_product/widget/text/local_custom_text.dart';
 import '../viewmodel/register_view_model.dart';
 
 class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
+  const RegisterView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,16 +102,14 @@ class RegisterView extends StatelessWidget {
       style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
-          color: context.colorScheme.onPrimary),
+          color: context.colors.onPrimary),
     );
   }
 
   Row buildSingInText(RegisterViewModel viewModel, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      // ignore: prefer_const_literals_to_create_immutables
       children: [
-        // ignore: prefer_const_constructors
         LocaleText(
           value: "Already have an account? ",
           style: const TextStyle(
@@ -125,7 +122,7 @@ class RegisterView extends StatelessWidget {
           child: LocaleText(
             value: "Log In",
             style: TextStyle(
-              color: context.colorScheme.onBackground,
+              color: context.colors.onSurface,
               decoration: TextDecoration.underline,
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -143,12 +140,12 @@ class RegisterView extends StatelessWidget {
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(color: context.colorScheme.secondary)),
-          fillColor: context.colorScheme.primary,
+              borderSide: BorderSide(color: context.colors.secondary)),
+          fillColor: context.colors.primary,
           hintText: 'Enter Your Name',
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           hintStyle: TextStyle(
-            color: context.colorScheme.secondary,
+            color: context.colors.secondary,
           )),
     );
   }
@@ -160,12 +157,12 @@ class RegisterView extends StatelessWidget {
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(color: context.colorScheme.secondary)),
-          fillColor: context.colorScheme.primary,
+              borderSide: BorderSide(color: context.colors.secondary)),
+          fillColor: context.colors.primary,
           hintText: 'Enter Your Surname',
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           hintStyle: TextStyle(
-            color: context.colorScheme.secondary,
+            color: context.colors.secondary,
           )),
     );
   }
@@ -176,12 +173,12 @@ class RegisterView extends StatelessWidget {
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(color: context.colorScheme.secondary)),
-          fillColor: context.colorScheme.primary,
+              borderSide: BorderSide(color: context.colors.secondary)),
+          fillColor: context.colors.primary,
           hintText: 'Enter Your Email',
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           hintStyle: TextStyle(
-            color: context.colorScheme.secondary,
+            color: context.colors.secondary,
           )),
     );
   }
@@ -193,52 +190,55 @@ class RegisterView extends StatelessWidget {
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(color: context.colorScheme.secondary)),
-          fillColor: context.colorScheme.primary,
+              borderSide: BorderSide(color: context.colors.secondary)),
+          fillColor: context.colors.primary,
           hintText: 'Enter Your Password',
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           hintStyle: TextStyle(
-            color: context.colorScheme.secondary,
+            color: context.colors.secondary,
           )),
     );
   }
 
   Row buildDivider(BuildContext context) {
     return Row(children: <Widget>[
-      Expanded(child: Divider(color: context.colorScheme.secondary)),
+      Expanded(child: Divider(color: context.colors.secondary)),
       Padding(
-        padding: context.horizontalPaddingLow,
+        padding: context.paddingLowHorizontal,
         child: LocaleText(
           value: "OR",
           style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: context.colorScheme.onSecondary.withOpacity(0.20)),
+              color: context.colors.onSecondary.withValues(alpha: 0.20)),
         ),
       ),
-      Expanded(child: Divider(color: context.colorScheme.secondary)),
+      Expanded(child: Divider(color: context.colors.secondary)),
     ]);
   }
 
-  Container buildContinueGoogle(BuildContext context) {
-    return Container(
-      width: 330,
-      height: 53,
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: context.colorScheme.secondary,
-          ),
-          borderRadius: BorderRadius.circular(8.0)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          buildSvgPicture(SVGImagePaths.instance.googleSVG),
-          const SizedBox(width: 16),
-          const LocaleText(
-            value: "Continue with google",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-          )
-        ],
+  InkWell buildContinueGoogle(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        width: 330,
+        height: 53,
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: context.colors.secondary,
+            ),
+            borderRadius: BorderRadius.circular(8.0)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.g_mobiledata), // Temporary replacement
+            const SizedBox(width: 16),
+            const LocaleText(
+              value: "Continue with google",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -250,21 +250,20 @@ class RegisterView extends StatelessWidget {
         width: 330,
         height: 53,
         decoration: BoxDecoration(
-            color: context.colorScheme.onBackground,
+            color: context.colors.onSurface,
             border: Border.all(
-              color: context.colorScheme.primary,
+              color: context.colors.primary,
             ),
             borderRadius: BorderRadius.circular(8.0)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(width: 16),
             LocaleText(
-              value: "GET STARTED",
+              value: "Register",
               style: TextStyle(
+                  color: context.colors.primary,
                   fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: context.colorScheme.primary),
+                  fontWeight: FontWeight.w400),
             )
           ],
         ),

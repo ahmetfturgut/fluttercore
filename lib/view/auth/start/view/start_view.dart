@@ -1,13 +1,13 @@
-  import 'package:flutter/material.dart';
-import 'package:kartal/kartal.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/base/view/base_widget.dart';
 import '../../../../core/constants/image/image_constatns.dart';
+import '../../../../core/extension/context_extension.dart';
 import '../../../_product/widget/text/local_custom_text.dart';
 import '../viewmodel/start_view_model.dart';
 
 class StartView extends StatelessWidget {
-  const StartView({super.key});
+  const StartView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +46,12 @@ class StartView extends StatelessWidget {
 
   LocaleText builddContent(BuildContext context) {
     return LocaleText(
-      value: "Sign up to get the latest software news. Let’s get started!",
+      value: "Sign up to get the latest software news. Let's get started!",
       textAlign: TextAlign.center,
       style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
-          color: context.colorScheme.surface),
+          color: context.colors.surface),
     );
   }
 
@@ -62,7 +62,7 @@ class StartView extends StatelessWidget {
       style: TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.w700,
-          color: context.colorScheme.onSurface),
+          color: context.colors.onSurface),
     );
   }
 
@@ -106,21 +106,20 @@ class StartView extends StatelessWidget {
         width: 330,
         height: 53,
         decoration: BoxDecoration(
-            color: context.colorScheme.onBackground,
+            color: context.colors.onSurface,
             border: Border.all(
-              color: context.colorScheme.primary,
+              color: context.colors.primary,
             ),
             borderRadius: BorderRadius.circular(8.0)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(width: 16),
             LocaleText(
               value: "GET STARTED",
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: context.colorScheme.primary),
+                  color: context.colors.primary),
             )
           ],
         ),
@@ -131,10 +130,7 @@ class StartView extends StatelessWidget {
   Row buildContinueGuest(StartViewModel viewModel, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      // ignore: prefer_const_literals_to_create_immutables
       children: [
-        // ignore: prefer_const_constructors
-
         InkWell(
           onTap: () => viewModel.continueGuest(),
           child: const Padding(

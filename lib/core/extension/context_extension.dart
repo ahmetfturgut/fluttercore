@@ -48,6 +48,23 @@ extension PaddingExtensionSymetric on BuildContext {
       EdgeInsets.symmetric(horizontal: highValue);
 }
 
+// SizedBox Extensions for Responsive Design
+extension SizedBoxExtension on BuildContext {
+  // Height SizedBox
+  SizedBox get emptySizedHeightBoxLow => SizedBox(height: lowValue);
+  SizedBox get emptySizedHeightBoxNormal => SizedBox(height: normalValue);
+  SizedBox get emptySizedHeightBoxMedium => SizedBox(height: mediumValue);
+  SizedBox get emptySizedHeightBoxHigh => SizedBox(height: highValue);
+  SizedBox get emptySizedHeightBoxLow3x => SizedBox(height: lowValue * 3);
+
+  // Width SizedBox
+  SizedBox get emptySizedWidthBoxLow => SizedBox(width: lowValue);
+  SizedBox get emptySizedWidthBoxNormal => SizedBox(width: normalValue);
+  SizedBox get emptySizedWidthBoxMedium => SizedBox(width: mediumValue);
+  SizedBox get emptySizedWidthBoxHigh => SizedBox(width: highValue);
+  SizedBox get emptySizedWidthBoxLow3x => SizedBox(width: lowValue * 3);
+}
+
 extension PageExtension on BuildContext {
   Color get randomColor => Colors.primaries[Random().nextInt(17)];
 }
@@ -55,4 +72,5 @@ extension PageExtension on BuildContext {
 extension DurationExtension on BuildContext {
   Duration get lowDuration => const Duration(milliseconds: 500);
   Duration get normalDuration => const Duration(seconds: 1);
+  Duration get durationLow => const Duration(milliseconds: 500);
 }

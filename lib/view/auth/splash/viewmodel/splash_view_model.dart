@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:kartal/kartal.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/base/model/base_view_model.dart';
 import '../../../../core/constants/enums/locale_keys_enum.dart';
 import '../../../../core/constants/navigation/navigation_constants.dart';
+import '../../../../core/extension/context_extension.dart';
 import '../../../../product/enum/platform_project.dart';
 import '../model/force_update_model.dart';
 import '../service/splash_service.dart';
 import 'device_and_cahe.dart';
-
-
 
 final class SplashViewModel with Store, BaseViewModel, DeviceAndCache {
   @override
@@ -54,8 +52,7 @@ final class SplashViewModel with Store, BaseViewModel, DeviceAndCache {
           await navigation.navigateToPageClear(
               path: NavigationConstants.STARTPAGE);
         } else {
-          await navigation.navigateToPageClear(
-              path: NavigationConstants.LOGIN);
+          await navigation.navigateToPageClear(path: NavigationConstants.LOGIN);
         }
       }
     }
@@ -69,7 +66,7 @@ final class SplashViewModel with Store, BaseViewModel, DeviceAndCache {
 
   Future<bool> _checkAppVersion() async {
     final response = await service?.checkDeviceVersion(
-      version: ''.version,
+      version: '1.0.0', // Replace with actual version
       platform: '${PlatformProject.IOS.versionNumber}',
     );
 
@@ -81,7 +78,7 @@ final class SplashViewModel with Store, BaseViewModel, DeviceAndCache {
   }
 
   Future<void> startAnimationOnView() async {
-    await Future.delayed(viewModelContext.durationLow);
+    await Future.delayed(viewModelContext.durationLow); // Responsive duration
     _changeFirstInit();
   }
 

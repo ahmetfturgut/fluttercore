@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kartal/kartal.dart';
-
 import '../../../../core/base/view/base_widget.dart';
-import '../../../_product/_constants/image_path_svg.dart';
+import '../../../../core/extension/context_extension.dart';
 import '../../../_product/widget/text/local_custom_text.dart';
 import '../viewmodel/login_view_model.dart';
 
 class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,16 +94,14 @@ class LoginView extends StatelessWidget {
       style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
-          color: context.colorScheme.onPrimary),
+          color: context.colors.onPrimary),
     );
   }
 
   Row buildSingUpText(LoginViewModel viewModel, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      // ignore: prefer_const_literals_to_create_immutables
       children: [
-        // ignore: prefer_const_constructors
         LocaleText(
           value: "Don't have an account? ",
           style: const TextStyle(
@@ -118,7 +114,7 @@ class LoginView extends StatelessWidget {
           child: LocaleText(
             value: "Sign Up",
             style: TextStyle(
-              color: context.colorScheme.onBackground,
+              color: context.colors.onSurface,
               decoration: TextDecoration.underline,
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -135,12 +131,12 @@ class LoginView extends StatelessWidget {
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(color: context.colorScheme.secondary)),
-          fillColor: context.colorScheme.primary,
+              borderSide: BorderSide(color: context.colors.secondary)),
+          fillColor: context.colors.primary,
           hintText: 'Enter Your Email',
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           hintStyle: TextStyle(
-            color: context.colorScheme.secondary,
+            color: context.colors.secondary,
           )),
     );
   }
@@ -151,30 +147,30 @@ class LoginView extends StatelessWidget {
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(color: context.colorScheme.secondary)),
-          fillColor: context.colorScheme.primary,
+              borderSide: BorderSide(color: context.colors.secondary)),
+          fillColor: context.colors.primary,
           hintText: 'Enter Your Password',
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           hintStyle: TextStyle(
-            color: context.colorScheme.secondary,
+            color: context.colors.secondary,
           )),
     );
   }
 
   Row buildDivider(BuildContext context) {
     return Row(children: <Widget>[
-      Expanded(child: Divider(color: context.colorScheme.secondary)),
+      Expanded(child: Divider(color: context.colors.secondary)),
       Padding(
-        padding: context.horizontalPaddingLow,
+        padding: context.paddingLowHorizontal,
         child: LocaleText(
           value: "OR",
           style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: context.colorScheme.onSecondary.withOpacity(0.20)),
+              color: context.colors.onSecondary.withValues(alpha: 0.20)),
         ),
       ),
-      Expanded(child: Divider(color: context.colorScheme.secondary)),
+      Expanded(child: Divider(color: context.colors.secondary)),
     ]);
   }
 
@@ -186,13 +182,13 @@ class LoginView extends StatelessWidget {
         height: 53,
         decoration: BoxDecoration(
             border: Border.all(
-              color: context.colorScheme.secondary,
+              color: context.colors.secondary,
             ),
             borderRadius: BorderRadius.circular(8.0)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildSvgPicture(SVGImagePaths.instance.googleSVG),
+            Icon(Icons.g_mobiledata), // Temporary replacement
             const SizedBox(width: 16),
             const LocaleText(
               value: "Continue with google",
@@ -211,21 +207,20 @@ class LoginView extends StatelessWidget {
         width: 330,
         height: 53,
         decoration: BoxDecoration(
-            color: context.colorScheme.onBackground,
+            color: context.colors.onSurface,
             border: Border.all(
-              color: context.colorScheme.primary,
+              color: context.colors.primary,
             ),
             borderRadius: BorderRadius.circular(8.0)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(width: 16),
             LocaleText(
-              value: "GET STARTED",
+              value: "Log In",
               style: TextStyle(
+                  color: context.colors.primary,
                   fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: context.colorScheme.primary),
+                  fontWeight: FontWeight.w400),
             )
           ],
         ),
