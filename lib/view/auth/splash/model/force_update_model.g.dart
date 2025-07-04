@@ -12,8 +12,9 @@ ForceUpdateModel _$ForceUpdateModelFromJson(Map<String, dynamic> json) =>
           ? null
           : ForceUpdateDataModel.fromJson(
               (json['data'] as Map<String, dynamic>).map(
-              (k, e) => MapEntry(k, e as Object),
-            )),
+                (k, e) => MapEntry(k, e as Object),
+              ),
+            ),
       isSuccess: json['isSuccess'] as bool?,
       timestamp: json['timestamp'] as String?,
     );
@@ -26,17 +27,17 @@ Map<String, dynamic> _$ForceUpdateModelToJson(ForceUpdateModel instance) =>
     };
 
 ForceUpdateDataModel _$ForceUpdateDataModelFromJson(
-        Map<String, dynamic> json) =>
-    ForceUpdateDataModel(
-      isForceUpdate: json['isForceUpdate'] as bool?,
-      type: json['type'] as String?,
-      currentVersion: json['currentVersion'] as String?,
-    );
+  Map<String, dynamic> json,
+) => ForceUpdateDataModel(
+  isForceUpdate: json['isForceUpdate'] as bool?,
+  type: json['type'] as String?,
+  currentVersion: json['currentVersion'] as String?,
+);
 
 Map<String, dynamic> _$ForceUpdateDataModelToJson(
-        ForceUpdateDataModel instance) =>
-    <String, dynamic>{
-      'isForceUpdate': instance.isForceUpdate,
-      'type': instance.type,
-      'currentVersion': instance.currentVersion,
-    };
+  ForceUpdateDataModel instance,
+) => <String, dynamic>{
+  'isForceUpdate': instance.isForceUpdate,
+  'type': instance.type,
+  'currentVersion': instance.currentVersion,
+};

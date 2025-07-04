@@ -28,21 +28,22 @@ Map<String, dynamic> _$LoginResponseModelToJson(LoginResponseModel instance) =>
 
 LoginDataModel _$LoginDataModelFromJson(Map<String, dynamic> json) =>
     LoginDataModel(
-      authendicatedUser: json['authendicatedUser'] == null
+      authenticatedUser: json['authenticatedUser'] == null
           ? null
-          : AuthendicatedUser.fromJson(
-              json['authendicatedUser'] as Map<String, dynamic>),
+          : AuthenticatedUser.fromJson(
+              json['authenticatedUser'] as Map<String, dynamic>,
+            ),
       token: json['token'] as String?,
     );
 
 Map<String, dynamic> _$LoginDataModelToJson(LoginDataModel instance) =>
     <String, dynamic>{
-      'authendicatedUser': instance.authendicatedUser,
+      'authenticatedUser': instance.authenticatedUser,
       'token': instance.token,
     };
 
-AuthendicatedUser _$AuthendicatedUserFromJson(Map<String, dynamic> json) =>
-    AuthendicatedUser(
+AuthenticatedUser _$AuthenticatedUserFromJson(Map<String, dynamic> json) =>
+    AuthenticatedUser(
       id: json['id'] as String?,
       email: json['email'] as String?,
       state: json['state'] as String?,
@@ -51,7 +52,7 @@ AuthendicatedUser _$AuthendicatedUserFromJson(Map<String, dynamic> json) =>
       userImage: json['userImage'] as String?,
     );
 
-Map<String, dynamic> _$AuthendicatedUserToJson(AuthendicatedUser instance) =>
+Map<String, dynamic> _$AuthenticatedUserToJson(AuthenticatedUser instance) =>
     <String, dynamic>{
       'id': instance.id,
       'email': instance.email,

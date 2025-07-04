@@ -8,7 +8,11 @@ import '../../../../core/init/lang/locale_keys.g.dart';
 import '../../../_product/_constants/image_path_svg.dart';
 import '../model/on_board_model.dart';
 
-final class OnBoardViewModel with Store, BaseViewModel {
+part 'on_board_view_model.g.dart';
+
+class OnBoardViewModel = _OnBoardViewModelBase with _$OnBoardViewModel;
+
+abstract class _OnBoardViewModelBase with Store, BaseViewModel {
   @override
   void setContext(BuildContext context) {
     viewModelContext = context;

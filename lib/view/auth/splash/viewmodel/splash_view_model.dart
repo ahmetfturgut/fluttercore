@@ -10,7 +10,11 @@ import '../model/force_update_model.dart';
 import '../service/splash_service.dart';
 import 'device_and_cahe.dart';
 
-final class SplashViewModel with Store, BaseViewModel, DeviceAndCache {
+part 'splash_view_model.g.dart';
+
+class SplashViewModel = _SplashViewModelBase with _$SplashViewModel;
+
+abstract class _SplashViewModelBase with Store, BaseViewModel, DeviceAndCache {
   @override
   void setContext(BuildContext context) => viewModelContext = context;
 

@@ -1,4 +1,4 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/base/model/base_view_model.dart';
@@ -8,8 +8,11 @@ import '../model/register_model.dart';
 import '../service/IRegisterService.dart';
 import '../service/register_service.dart';
 
+part 'register_view_model.g.dart';
 
-final class RegisterViewModel with Store, BaseViewModel {
+class RegisterViewModel = _RegisterViewModelBase with _$RegisterViewModel;
+
+abstract class _RegisterViewModelBase with Store, BaseViewModel {
   @override
   void setContext(BuildContext context) => viewModelContext = context;
 

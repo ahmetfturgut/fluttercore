@@ -14,7 +14,7 @@ class VexanaManager {
 
   //static const String _iosBaseUrl = "http://3.76.116.155:3012/";
 
-  static const String _iosBaseUrl = 'http://localhost:9090/';
+  static const String _iosBaseUrl = 'http://localhost:8080/';
 
   static const String _androidBaseUrl = local;
 

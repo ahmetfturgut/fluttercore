@@ -5,18 +5,19 @@ part 'login_response_model.g.dart';
 
 @JsonSerializable()
 class LoginResponseModel extends INetworkModel<LoginResponseModel> {
-  LoginDataModel? data;
-  bool? isSuccess;
-  String? timestamp;
-  int? errorCode;
-  String? message;
+  final LoginDataModel? data;
+  final bool? isSuccess;
+  final String? timestamp;
+  final int? errorCode;
+  final String? message;
 
-  LoginResponseModel(
-      {this.data,
-      this.isSuccess,
-      this.timestamp,
-      this.errorCode,
-      this.message});
+  const LoginResponseModel({
+    this.data,
+    this.isSuccess,
+    this.timestamp,
+    this.errorCode,
+    this.message,
+  });
 
   @override
   LoginResponseModel fromJson(Map<String, dynamic> json) {
@@ -24,44 +25,50 @@ class LoginResponseModel extends INetworkModel<LoginResponseModel> {
   }
 
   @override
-  Map<String, dynamic>? toJson() {
+  Map<String, dynamic> toJson() {
     return _$LoginResponseModelToJson(this);
   }
 }
 
 @JsonSerializable()
 class LoginDataModel {
-  AuthendicatedUser? authendicatedUser;
-  String? token;
+  final AuthenticatedUser? authenticatedUser;
+  final String? token;
 
-  LoginDataModel({this.authendicatedUser, this.token});
+  const LoginDataModel({this.authenticatedUser, this.token});
 
   factory LoginDataModel.fromJson(Map<String, dynamic> json) {
     return _$LoginDataModelFromJson(json);
   }
 
-  Map<String, dynamic>? toJson() {
+  Map<String, dynamic> toJson() {
     return _$LoginDataModelToJson(this);
   }
 }
 
 @JsonSerializable()
-class AuthendicatedUser {
-  String? id;
-  String? email;
-  String? state;
-  String? lang;
-  String? name;
-  String? userImage;
+class AuthenticatedUser {
+  final String? id;
+  final String? email;
+  final String? state;
+  final String? lang;
+  final String? name;
+  final String? userImage;
 
-  AuthendicatedUser(
-      {this.id, this.email, this.state, this.lang, this.name, this.userImage});
+  const AuthenticatedUser({
+    this.id,
+    this.email,
+    this.state,
+    this.lang,
+    this.name,
+    this.userImage,
+  });
 
-  factory AuthendicatedUser.fromJson(Map<String, dynamic> json) {
-    return _$AuthendicatedUserFromJson(json);
+  factory AuthenticatedUser.fromJson(Map<String, dynamic> json) {
+    return _$AuthenticatedUserFromJson(json);
   }
 
-  Map<String, dynamic>? toJson() {
-    return _$AuthendicatedUserToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$AuthenticatedUserToJson(this);
   }
 }

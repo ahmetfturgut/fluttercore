@@ -3,14 +3,20 @@ import 'package:core_flutter_app/view/auth/login/model/login_request_model.dart'
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import '../../../../core/base/model/base_view_model.dart';
- import '../../../../core/constants/navigation/navigation_constants.dart';
+import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/init/network/vexana_manager.dart';
- import '../service/ILoginService.dart';
+import '../service/ILoginService.dart';
 import '../service/login_service.dart';
+part 'login_view_model.g.dart';
 
-final class LoginViewModel with Store, BaseViewModel {
+class LoginViewModel = _LoginViewModelBase with _$LoginViewModel;
+
+abstract class _LoginViewModelBase with Store, BaseViewModel {
   @observable
   bool isLoading = false;
+
+  @observable
+  String? errorMessage;
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   ILoginService? loginService;
@@ -30,32 +36,55 @@ final class LoginViewModel with Store, BaseViewModel {
   }
 
   @action
+  void _setLoading(bool value) {
+    isLoading = value;
+  }
+
+  @action
+  void _setError(String? error) {
+    errorMessage = error;
+  }
+
+  @action
   Future<void> login() async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
-     final emailError = email.isValidEmail;
-    if (emailError != null) {
-      _showMessage(emailError);
+    // Clear previous errors
+    _setError(null);
+
+    // Validation
+    if (email.isEmpty || !email.contains('@')) {
+      _setError('Please enter a valid email address');
       return;
     }
 
-    if (password.isEmpty) {
-      _showMessage('Password cannot be empty');
+    if (password.isEmpty || password.length < 6) {
+      _setError('Password must be at least 6 characters');
       return;
     }
 
-    final data = LoginRequestModel(
-      email: email,
-      password: password,
-    );
+    try {
+      _setLoading(true);
 
-    final response = await loginService?.fetchLogin(data);
+      final data = LoginRequestModel(
+        email: email,
+        password: password,
+      );
 
-    if (response != null) {
-      if (response.data?.token?.isEmpty ?? true) return;
-      _showMessage('Login successful');
-      await navigation.navigateToPageClear(path: NavigationConstants.DEFAULT);
+      final response = await loginService?.fetchLogin(data);
+
+      if (response?.data?.token?.isNotEmpty == true) {
+        // Save token to secure storage here
+        _showMessage('Login successful');
+        await navigation.navigateToPageClear(path: NavigationConstants.DEFAULT);
+      } else {
+        _setError(response?.message ?? 'Login failed. Please try again.');
+      }
+    } catch (e) {
+      _setError('Network error. Please check your connection.');
+    } finally {
+      _setLoading(false);
     }
   }
 
@@ -75,5 +104,10 @@ final class LoginViewModel with Store, BaseViewModel {
         SnackBar(content: Text(message)),
       );
     }
+  }
+
+  void disposeControllers() {
+    emailController.dispose();
+    passwordController.dispose();
   }
 }
